@@ -1,0 +1,30 @@
+{
+  "name": "jcvd",
+  "version": "0.1.0",
+  "description": "View HN items and HN discussion at the same time.",
+  "main": "jcvd.js",
+  "dependencies": {
+    "typescript": "^2.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skytreader/jcvd.git"
+  },
+  "keywords": [
+    "hacker",
+    "news",
+    "typescript",
+    "google",
+    "chrome"
+  ],
+  "author": "Chad Estioco",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skytreader/jcvd/issues"
+  },
+  "homepage": "https://github.com/skytreader/jcvd#readme"
+}
