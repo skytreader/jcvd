@@ -1,0 +1,11 @@
+{
+    "manifest_version": 2,
+    "name": "jcvd",
+    "description": "Just read the GitHub repo: https://github.com/skytreader/jcvd",
+    "version": "0.1.0",
+    "browser_action": {
+        "default_icon": "assets/ic_jcvd.png",
+        "default_popup": "jcvd.html"
+    },
+    "permissions": ["tabs", "<all_urls>"]
+}
