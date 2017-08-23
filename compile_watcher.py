@@ -6,13 +6,23 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler, LoggingEventHandler
 
 class CompileEventHandler(FileSystemEventHandler):
+
+    def __init__(self, build_dir=None):
+        super(CompileEventHandler, self).__init__()
+        self.build_dir = build_dir[0:-1] if build_dir and build_dir[-1] == "/" else build_dir
+        print("build_dir is %s" % self.build_dir)
     
     def __to_js(self, filename):
         """
         Assumes that you give it ".ts" files and changes the extension to ".js".
         """
         filename_parse = filename.split(".")
-        return ".".join(filename_parse[0:-1]) + ".js"
+        sans_extension = ".".join(filename_parse[0:-1])
+        if self.build_dir:
+            sans_extension_parse = sans_extension.split("/")
+            sans_extension_parse[-2] = self.build_dir
+            sans_extension = "/".join(sans_extension_parse)
+        return sans_extension + ".js"
     
     def __compile(self, src):
         outfile = self.__to_js(src)
@@ -63,7 +73,7 @@ if __name__ == "__main__":
                         datefmt='%Y-%m-%d %H:%M:%S')
     path = sys.argv[1] if len(sys.argv) > 1 else '.'
     observer = Observer()
-    observer.schedule(CompileEventHandler(), path, recursive=True)
+    observer.schedule(CompileEventHandler("jsbuild"), path, recursive=True)
     observer.start()
     try:
         while True:
