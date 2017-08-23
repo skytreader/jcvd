@@ -11,7 +11,8 @@ class CompileEventHandler(FileSystemEventHandler):
         """
         Assumes that you give it ".ts" files and changes the extension to ".js".
         """
-        filename = src.split(".")
+        filename_parse = filename.split(".")
+        return ".".join(filename_parse[0:-1]) + ".js"
     
     def __compile(self, src):
         outfile = self.__to_js(src)
@@ -26,7 +27,10 @@ class CompileEventHandler(FileSystemEventHandler):
         logging.info("deleted %s" % outfile)
 
     def __is_js_event(self, event):
-        return not event.is_directory and event.src_path.endswith(".js")
+        return not event.is_directory and event.src_path.endswith(".ts")
+
+    def on_any_event(self, event):
+        super(CompileEventHandler, self).on_any_event(event)
 
     def on_created(self, event):
         super(CompileEventHandler, self).on_created(event)
