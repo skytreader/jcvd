@@ -10,7 +10,6 @@ class CompileEventHandler(FileSystemEventHandler):
     def __init__(self, build_dir=None):
         super(CompileEventHandler, self).__init__()
         self.build_dir = build_dir[0:-1] if build_dir and build_dir[-1] == "/" else build_dir
-        print("build_dir is %s" % self.build_dir)
     
     def __to_js(self, filename):
         """
@@ -36,25 +35,25 @@ class CompileEventHandler(FileSystemEventHandler):
         subprocess.call(["rm", outfile])
         logging.info("deleted %s" % outfile)
 
-    def __is_js_event(self, event):
+    def __is_ts_event(self, event):
         return not event.is_directory and event.src_path.endswith(".ts")
-
-    def on_any_event(self, event):
-        super(CompileEventHandler, self).on_any_event(event)
 
     def on_created(self, event):
         super(CompileEventHandler, self).on_created(event)
-        if self.__is_js_event(event):
+        if self.__is_ts_event(event):
+            logging.debug("TS created event %s" % event)
             self.__compile(event.src_path)
 
     def on_deleted(self, event):
         super(CompileEventHandler, self).on_deleted(event)
-        if self.__is_js_event(event):
+        if self.__is_ts_event(event):
+            logging.debug("TS delete event %s" % event)
             self.__delete(event.src_path)
 
     def on_modified(self, event):
         super(CompileEventHandler, self).on_modified(event)
-        if self.__is_js_event(event):
+        if self.__is_ts_event(event):
+            logging.debug("TS modified event %s" % event)
             self.__compile(event.src_path)
 
     def on_moved(self, event):
@@ -63,9 +62,11 @@ class CompileEventHandler(FileSystemEventHandler):
         extension.
         """
         super(CompileEventHandler, self).on_moved(event)
-        if self.__is_js_event(event):
+        if self.__is_ts_event(event):
+            logging.debug("TS moved event %s" % event)
             self.__delete(event.src_path)
-            self.__compile(event.dest_path)
+            if event.dest_path.endswith(".ts"):
+                self.__compile(event.dest_path)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,
