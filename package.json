@@ -5,6 +5,8 @@
   "main": "jcvd.js",
   "dependencies": {
     "@types/chrome": "0.0.48",
+    "@types/jquery": "^3.2.12",
+    "jquery": "^3.2.1",
     "typescript": "^2.4.2"
   },
   "devDependencies": {},

@@ -7,5 +7,11 @@
         "default_icon": "assets/ic_jcvd.png",
         "default_popup": "jcvd.html"
     },
+    "content_scripts": [
+        {
+            "matches": ["*://news.ycombinator.com/*"],
+            "js": ["node_modules/jquery/dist/jquery.js", "jsbuild/replace.js"]
+        }
+    ],
     "permissions": ["tabs", "<all_urls>"]
 }
