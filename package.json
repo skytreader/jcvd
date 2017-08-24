@@ -4,6 +4,7 @@
   "description": "View HN items and HN discussion at the same time.",
   "main": "jcvd.js",
   "dependencies": {
+    "@types/chrome": "0.0.48",
     "typescript": "^2.4.2"
   },
   "devDependencies": {},
