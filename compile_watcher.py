@@ -76,6 +76,7 @@ if __name__ == "__main__":
     observer = Observer()
     observer.schedule(CompileEventHandler("jsbuild"), path, recursive=True)
     observer.start()
+    logging.info("Watching directory...")
     try:
         while True:
             time.sleep(1)
