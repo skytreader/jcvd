@@ -26,7 +26,7 @@ class CompileEventHandler(FileSystemEventHandler):
     def __compile(self, src):
         outfile = self.__to_js(src)
         subprocess.call([
-            "node_modules/typescript/bin/tsc", "--outFile", outfile, src
+            "node_modules/typescript/bin/tsc", "--lib", "es2015", "es2015.iterable", "--outFile", outfile, src
         ])
         logging.info("compiled %s to %s" % (src, outfile))
     
