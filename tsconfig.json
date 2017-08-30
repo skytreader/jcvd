@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "outDir": "build",
+        "rootDir": "./",
+        "lib": ["es2015.iterable"],
+        "target": "ES6"
+    }
+}
