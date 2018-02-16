@@ -6,6 +6,11 @@ import subprocess
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler, LoggingEventHandler
 
+"""
+This script watches all Typescript files in the current directory and compiles
+them if and when they change.
+"""
+
 class CompileEventHandler(FileSystemEventHandler):
 
     def __init__(self, build_dir=None):
@@ -16,7 +21,14 @@ class CompileEventHandler(FileSystemEventHandler):
             if not os.path.isdir(self.build_dir):
                 logging.error("Given build dir (%s) is not a directory." % (self.build_dir))
         else:
+            logging.info("No build directory found. Building for the first time...")
             os.mkdir(self.build_dir)
+            for dirpath, dirnames, filenames in os.walk("."):
+                for name in filenames:
+                    if name.endswith(".ts"):
+                        fullfilename = os.path.join(dirpath, name)
+                        self.__to_js(fullfilename)
+                        logging.info("Built %s" % fullfilename)
             
     
     def __to_js(self, filename):
