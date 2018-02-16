@@ -24,11 +24,15 @@ class CompileEventHandler(FileSystemEventHandler):
             logging.info("No build directory found. Building for the first time...")
             os.mkdir(self.build_dir)
             for dirpath, dirnames, filenames in os.walk("."):
+                split_path = dirpath.split(os.sep)
+                if len(split_path) > 1:
+                    if dirpath.split(os.sep)[1] == "node_modules":
+                        continue
+
                 for name in filenames:
                     if name.endswith(".ts"):
                         fullfilename = os.path.join(dirpath, name)
-                        self.__to_js(fullfilename)
-                        logging.info("Built %s" % fullfilename)
+                        self.__compile(fullfilename)
             
     
     def __to_js(self, filename):
