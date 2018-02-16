@@ -20,7 +20,7 @@ function _getUrl(callback){
 function pseudoMain(isHN: boolean){
     var det = document.getElementById("det");
     if(isHN){
-        det.innerHTML = "At HN";
+        det.innerHTML = "At HN 8";
     } else{
         det.innerHTML = "Not at HN";
     }
