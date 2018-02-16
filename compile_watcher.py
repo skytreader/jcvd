@@ -1,6 +1,7 @@
 import sys
 import time
 import logging
+import os
 import subprocess
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler, LoggingEventHandler
@@ -10,6 +11,13 @@ class CompileEventHandler(FileSystemEventHandler):
     def __init__(self, build_dir=None):
         super(CompileEventHandler, self).__init__()
         self.build_dir = build_dir[0:-1] if build_dir and build_dir[-1] == "/" else build_dir
+
+        if os.path.exists(self.build_dir):
+            if not os.path.isdir(self.build_dir):
+                logging.error("Given build dir (%s) is not a directory." % (self.build_dir))
+        else:
+            os.mkdir(self.build_dir)
+            
     
     def __to_js(self, filename):
         """
