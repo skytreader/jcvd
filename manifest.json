@@ -7,6 +7,7 @@
         "default_icon": "assets/ic_jcvd.png",
         "default_popup": "jcvd.html"
     },
+    "web_accessible_resources": ["pages/*"],
     "content_scripts": [
         {
             "matches": ["*://news.ycombinator.com/*"],
