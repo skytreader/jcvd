@@ -15,6 +15,6 @@ $(document).ready(() => {
         //chrome.tabs.create({"url": chrome.extension.getURL("test.html")},
         //    (tab) => {}
         //);
-        window.open(chrome.runtime.getURL("test.html"));
+        window.open(chrome.runtime.getURL("pages/test.html"));
     });
 });
