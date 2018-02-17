@@ -12,8 +12,9 @@ $(document).ready(() => {
     //console.log($(this).attr("href"));
     $("a").click(() => {
         console.log("click detected");
-        chrome.tabs.create({"url": chrome.extension.getURL("test.html")},
-            (tab) => {}
-        );
+        //chrome.tabs.create({"url": chrome.extension.getURL("test.html")},
+        //    (tab) => {}
+        //);
+        window.open(chrome.runtime.getURL("test.html"));
     });
 });
