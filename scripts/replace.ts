@@ -4,8 +4,10 @@
 console.log("test");
 
 $(document).ready(() => {
-    $("a").click(() => {
-        console.log("click detected");
+    // TODO Type this because fuck, there aren't even _basic_ examples in the internet today!
+    $("a").click((e) => {
+        console.log(JSON.stringify(e));
+        console.log(JSON.stringify(e.target));
         window.open(chrome.runtime.getURL("pages/test.html"));
     });
 });
